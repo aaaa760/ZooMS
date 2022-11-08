@@ -36,6 +36,7 @@ const Navbar = () => {
           <div
             className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
       text-slate-100"
+            onClick={() => navigate("/")}
           >
             {/* <span className="text-3xl text-green-800 mr-1 pt-2">
             <ion-icon name="leaf-sharp"></ion-icon>
@@ -72,7 +73,13 @@ const Navbar = () => {
               <Button func={() => navigate("/donate")}>Donate</Button>
             </li>
             <li className="md:ml-6 text-md md:my-0 my-7">
-              {!false ? <Button>Buy Tickets</Button> : <DropdownButton />}
+              {!false ? (
+                <Button func={() => navigate("/book-ticket")}>
+                  Buy Tickets
+                </Button>
+              ) : (
+                <DropdownButton />
+              )}
             </li>
           </ul>
         </div>

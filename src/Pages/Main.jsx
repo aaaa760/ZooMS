@@ -1,7 +1,7 @@
 function Main() {
   return (
     <>
-      <p>Hello</p>
+      <p>Home Page</p>
     </>
   );
 }

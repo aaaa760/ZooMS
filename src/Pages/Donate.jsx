@@ -1,7 +1,35 @@
 import React from "react";
 import Button from "../Components/Button";
+import { useState } from "react";
 
 function Donate() {
+  const [name, setName] = useState("");
+  const [city, setCity] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [showDetails, setShowDetails] = useState(false);
+  const [details, setDetails] = useState({});
+  const [amount, setAmount] = useState(0);
+
+  const getDetails = () => {
+    if (name && city && email && phone) {
+      setDetails({
+        Name: name,
+        City: city,
+        Email: email,
+        Phone: phone,
+      });
+      setShowDetails(true);
+    }
+    console.log(details);
+  };
+
+  const Donate = () => {
+    if (amount) {
+      console.log("Thank you for your Donation. Amount Donated " + amount);
+    }
+  };
+
   return (
     <div className="w-screen h-screen flex justify-center items-center text-center bg-emerald-400">
       <div className="flex gap-4 flex-row flex-wrap w-3/6 rounded-lg">
@@ -12,70 +40,185 @@ function Donate() {
           <p>You can donate any amount you wish</p>
           <p>to contribute.</p>
         </div>
-        <div className="bg-white p-3 rounded flex-auto">
-          <p className="mb-6 bg-blue-200 h-auto text-center rounded-lg p-1">
-            Donation Towards Zoo
-          </p>
-          <form class="w-full max-w-lg">
-            <div className="m-5">
-              <label
-                class="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4"
-                for="inline-full-name"
-              >
-                Name
-              </label>
+        {!showDetails ? (
+          <div className="bg-white p-3 rounded flex-auto">
+            <p className="mb-6 bg-blue-200 h-auto text-center rounded-lg p-1">
+              Donation Towards Zoo
+            </p>
+            <form className="w-full max-w-lg">
+              <div className="m-5">
+                <label className="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4">
+                  Name
+                </label>
+                <input
+                  className="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inline-full-name"
+                  type="text"
+                  placeholder="Your Name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="m-5">
+                <label className="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4">
+                  City
+                </label>
+                <input
+                  className="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inline-full-city"
+                  type="text"
+                  placeholder="Your City"
+                  onChange={(e) => setCity(e.target.value)}
+                />
+              </div>
+              <div className="m-5">
+                <label className="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4">
+                  Your Email Id
+                </label>
+                <input
+                  className="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inline-full-email"
+                  type="email"
+                  placeholder="Your Email Address"
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="m-5">
+                <label className="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4">
+                  Please Enter Your Mobile Number
+                </label>
+                <input
+                  className="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  id="inline-full-phone"
+                  type="tel"
+                  placeholder="Your Mobile Number"
+                  onChange={(e) => setPhone(e.target.value)}
+                />
+              </div>
+            </form>
+            <Button func={getDetails}>Next</Button>
+          </div>
+        ) : (
+          <div className="bg-white p-3 rounded flex-auto pt-6 pb-6">
+            <p className="mb-6 bg-blue-200 h-auto rounded-lg p-2 ml-auto mr-auto">
+              Donation Towards Zoo
+            </p>
+            <table
+              className="text-left ml-auto mr-auto"
+              cellspacing="20"
+              border="1"
+            >
+              <tbody>
+                <tr>
+                  <td>Name: </td>
+                  <td>{details.Name}</td>
+                </tr>
+                <tr>
+                  <td>City: </td>
+                  <td>{details.City}</td>
+                </tr>
+                <tr>
+                  <td>Email: </td>
+                  <td>{details.Email}</td>
+                </tr>
+                <tr>
+                  <td>Phone No: </td>
+                  <td>{details.Phone}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <p className="text-left mt-6 ml-6">
+                Please Choose or enter the amount you wish
+              </p>
+              <p className="text-left ml-6">to donate: </p>
+              <ul className="grid gap-2 w-full md:grid-cols-4 mt-2 mb-3">
+                <li class="form-check">
+                  <input
+                    class="hidden peer"
+                    type="radio"
+                    name="DonationRadio"
+                    id="DonationRadio1"
+                    value="2000"
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                    }}
+                  />
+                  <label
+                    class="form-check-label p-2 text-lg inline-flex justify-between items-center text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    for="DonationRadio1"
+                  >
+                    <span> &#x20b9; 1,000</span>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    class="hidden peer"
+                    type="radio"
+                    name="DonationRadio"
+                    id="DonationRadio2"
+                    value="3000"
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                    }}
+                  />
+                  <label
+                    class="form-check-label p-2 text-lg inline-flex justify-between items-center text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    for="DonationRadio2"
+                  >
+                    <span> &#x20b9; 5,000</span>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    class="hidden peer"
+                    type="radio"
+                    name="DonationRadio"
+                    id="DonationRadio3"
+                    value="4000"
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                    }}
+                  />
+                  <label
+                    class="form-check-label inline-flex justify-between items-center p-2 text-lg text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    for="DonationRadio3"
+                  >
+                    <span> &#x20b9; 10,000</span>
+                  </label>
+                </li>
+                <li>
+                  <input
+                    class="hidden peer"
+                    type="radio"
+                    name="DonationRadio"
+                    id="DonationRadio4"
+                    value="5000"
+                    onChange={(e) => {
+                      setAmount(e.target.value);
+                    }}
+                  />
+                  <label
+                    class="form-check-label inline-flex justify-between items-center p-2 text-lg text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    for="DonationRadio4"
+                  >
+                    <span> &#x20b9; 25,000</span>
+                  </label>
+                </li>
+              </ul>
               <input
-                class="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                id="inline-full-name"
-                type="text"
-                placeholder="Your Name"
-              />
-            </div>
-            <div className="m-5">
-              <label
-                class="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4"
-                for="inline-full-city"
-              >
-                City
-              </label>
-              <input
-                class="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                id="inline-full-city"
-                type="text"
-                placeholder="Your City"
-              />
-            </div>
-            <div className="m-5">
-              <label
-                class="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4"
-                for="inline-full-email"
-              >
-                Your Email Id
-              </label>
-              <input
-                class="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                id="inline-full-email"
-                type="email"
-                placeholder="Your Email Address"
-              />
-            </div>
-            <div className="m-5">
-              <label
-                class="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4"
-                for="inline-full-phone"
-              >
-                Please Enter Your Mobile Number
-              </label>
-              <input
-                class="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="bg-gray-200 appearance-none border-2 my-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="inline-full-phone"
                 type="tel"
-                placeholder="Your Mobile Number"
+                value={amount}
+                placeholder="Enter your own Amount"
+                onChange={(e) => {
+                  setAmount(e.target.value);
+                }}
               />
             </div>
-          </form>
-          <Button>Next</Button>
-        </div>
+            <Button func={() => Donate()}>Donate</Button>
+          </div>
+        )}
       </div>
     </div>
   );
