@@ -3,12 +3,12 @@ import DropdownButton from "./DropdownButton";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router";
 
-// import { LoginContext } from "../contexts/LoginContext";
+import { LoginContext } from "../contexts/LoginContext";
 
 import Button from "./Button";
 
 const Navbar = () => {
-  //   const { loginStatus } = useContext(LoginContext);
+  const { loginStatus } = useContext(LoginContext);
 
   let Links = [
     { name: "HOME", link: "/" },
@@ -20,22 +20,13 @@ const Navbar = () => {
   let [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
-
-  //   function navigateLogin() {
-  //       navigate("/login");
-  //   };
-
-  //   function navigateProfile() {
-  //     navigate("/profile");
-  //   }
-
   return (
     <>
-      <div className="shadow-md w-full top-0 sticky bg-slate-700 z-10">
+      <div className="shadow-md w-full top-0 sticky z-10 bg-gradient-to-tr from-green-300 via-green-200 to-green-500">
         <div className="md:flex items-center justify-between bg-opacity-75 py-4 md:px-10 px-7 select-none">
           <div
             className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
-      text-slate-100"
+      text-slate-800"
             onClick={() => navigate("/")}
           >
             {/* <span className="text-3xl text-green-800 mr-1 pt-2">
@@ -63,20 +54,43 @@ const Navbar = () => {
               >
                 <a
                   href={link.link}
-                  className="text-slate-100 hover:text-teal-200 duration-500"
+                  className="text-slate-800 hover:text-teal-300 duration-500"
                 >
                   {link.name}
                 </a>
               </li>
             ))}
+            {loginStatus ? (
+              <>
+                <li className="md:ml-6 text-md md:my-0 my-7">
+                  <Button func={() => navigate("/donate")}>Donate</Button>
+                </li>
+                <li className="md:ml-6 text-md md:my-0 my-7">
+                  <Button func={() => navigate("/book-ticket")}>
+                    Buy Tickets
+                  </Button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li
+                  className="md:ml-6 text-md md:my-0 my-7"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="bottom"
+                  title="Tooltip on bottom"
+                >
+                  <Button func={() => alert("Please login")}>Donate</Button>
+                </li>
+                <li className="md:ml-6 text-md md:my-0 my-7">
+                  <Button func={() => alert("Please Login")}>
+                    Buy Tickets
+                  </Button>
+                </li>
+              </>
+            )}
             <li className="md:ml-6 text-md md:my-0 my-7">
-              <Button func={() => navigate("/donate")}>Donate</Button>
-            </li>
-            <li className="md:ml-6 text-md md:my-0 my-7">
-              {!false ? (
-                <Button func={() => navigate("/book-ticket")}>
-                  Buy Tickets
-                </Button>
+              {!loginStatus ? (
+                <Button func={() => navigate("/login")}>Login</Button>
               ) : (
                 <DropdownButton />
               )}

@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../Components/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios"
 
 function BookTicket() {
   const [name, setName] = useState("");
@@ -12,6 +13,8 @@ function BookTicket() {
   //   const [amount, setAmount] = useState(0);
 
   const navigate = useNavigate();
+
+
 
   const getDetails = () => {
     if (name && city && email && date) {
@@ -33,7 +36,7 @@ function BookTicket() {
   //   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center text-center bg-emerald-400">
+    <div className="w-screen h-screen flex justify-center items-center text-center bg-gradient-to-tr from-yellow-200 via-green-200 to-green-500">
       <div className="flex gap-4 flex-row flex-wrap w-3/6 rounded-lg">
         <div className="p-5 pt-10 text-left flex-auto">
           <h1 className="text-2xl font-black">Please Select the date</h1>
@@ -50,7 +53,7 @@ function BookTicket() {
           </p>
         </div>
         <div className="bg-white p-3 rounded flex-auto">
-          <form className="w-full">
+          <form className="w-full" >
             <div className="m-5">
               <label className="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4">
                 Name
@@ -104,7 +107,7 @@ function BookTicket() {
               />
             </div>
           </form>
-          <Button func={() => getDetails()} type={"submit"}>
+          <Button func={() => getDetails()} >
             Next
           </Button>
         </div>

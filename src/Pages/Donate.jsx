@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../Components/Button";
-import { useState } from "react";
+import { useState,useContext } from "react";
+import Axios from "axios";
+import { LoginContext } from "../contexts/LoginContext";
 
 function Donate() {
   const [name, setName] = useState("");
@@ -10,6 +12,22 @@ function Donate() {
   const [showDetails, setShowDetails] = useState(false);
   const [details, setDetails] = useState({});
   const [amount, setAmount] = useState(0);
+  const { loginStatus } = useContext(LoginContext);
+
+  const addDonation = () => {
+    if (loginStatus) {
+      console.log("Thank you for your Donation. Amount Donated " + amount);
+      Axios.post("http://localhost:3001/sql_donate", {
+        name: name,
+        city: city,
+        email: email,
+        phone: phone,
+        amount: amount,
+      }).then(() => {
+        alert("Thank you for your Donation. Amount Donated " + amount);
+      });
+    }
+  };
 
   const getDetails = () => {
     if (name && city && email && phone) {
@@ -24,14 +42,8 @@ function Donate() {
     console.log(details);
   };
 
-  const Donate = () => {
-    if (amount) {
-      console.log("Thank you for your Donation. Amount Donated " + amount);
-    }
-  };
-
   return (
-    <div className="w-screen h-screen flex justify-center items-center text-center bg-emerald-400">
+    <div className="w-screen h-screen flex justify-center items-center text-center bg-gradient-to-tr from-yellow-200 via-green-200 to-green-500">
       <div className="flex gap-4 flex-row flex-wrap w-3/6 rounded-lg">
         <div className="p-5 pt-10 text-left flex-auto">
           <h1 className="text-2xl">Contribute towards</h1>
@@ -138,7 +150,7 @@ function Donate() {
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio1"
-                    value="2000"
+                    value="1000"
                     onChange={(e) => {
                       setAmount(e.target.value);
                     }}
@@ -156,7 +168,7 @@ function Donate() {
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio2"
-                    value="3000"
+                    value="5000"
                     onChange={(e) => {
                       setAmount(e.target.value);
                     }}
@@ -174,7 +186,7 @@ function Donate() {
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio3"
-                    value="4000"
+                    value="10000"
                     onChange={(e) => {
                       setAmount(e.target.value);
                     }}
@@ -192,7 +204,7 @@ function Donate() {
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio4"
-                    value="5000"
+                    value="25000"
                     onChange={(e) => {
                       setAmount(e.target.value);
                     }}
@@ -216,7 +228,7 @@ function Donate() {
                 }}
               />
             </div>
-            <Button func={() => Donate()}>Donate</Button>
+            <Button func={() => addDonation()}>Donate</Button>
           </div>
         )}
       </div>

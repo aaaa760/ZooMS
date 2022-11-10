@@ -1,19 +1,20 @@
 import { useState, useContext } from "react";
-// import { useNavigate } from 'react-router-dom'
-// import { LoginContext } from "../contexts/LoginContext";
+import { useNavigate } from 'react-router-dom'
+import { LoginContext } from "../contexts/LoginContext";
 
 const DropdownButton = () => {
-  //   const navigate = useNavigate()
+    const navigate = useNavigate()
 
   const [open, setOpen] = useState(false);
-  //   const { setLoginStatus, loginStatus } = useContext(LoginContext);
+    const { setLoginStatus, loginStatus } = useContext(LoginContext);
 
-  //   function logout() {
-  //     localStorage.removeItem("loginStatus")
-  //     localStorage.removeItem("account")
-  //     // setLoginStatus(false)
-  //     window.location.reload(false)
-  //   }
+    function logout() {
+      navigate('/')
+      localStorage.removeItem("loginStatus")
+      localStorage.removeItem("account")
+      setLoginStatus(false)
+      window.location.reload(false)
+    }
 
   return (
     <>
@@ -22,7 +23,7 @@ const DropdownButton = () => {
           <button
             type="button"
             onClick={() => setOpen(!open)}
-            className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center "
+            className="text-white bg-cyan-400 hover:bg-cyan-500 hover:text-purple-700 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center "
           >
             Hello!
             <svg
@@ -52,19 +53,7 @@ const DropdownButton = () => {
           >
             <li
               className="block py-2 px-4 hover:bg-gray-600"
-              onClick={() => {}}
-            >
-              Profile
-            </li>
-            <li
-              className="block py-2 px-4 hover:bg-gray-600"
-              onClick={() => {}}
-            >
-              My Tools
-            </li>
-            <li
-              className="block py-2 px-4 hover:bg-gray-600"
-              onClick={() => {}}
+              onClick={() => {logout()}}
             >
               Sign out
             </li>
