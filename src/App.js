@@ -7,6 +7,7 @@ import BookTicket from "./Pages/BookTicket";
 import BookTicket_step_2 from "./Pages/BookTicket-2";
 import Login from "./Pages/Login";
 import { LoginContext, LoginProvider } from './contexts/LoginContext';
+import Visit from "./Pages/Visit";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route exact path="donate" element={<Donate />} />
           <Route exact path="book-ticket" element={<BookTicket />} />
           <Route exact path="book-ticket/step-2" element={<BookTicket_step_2 />}/>
+          <Route exact path="visit" element={<Visit />} />
         </Route>
       </Routes>
     </BrowserRouter>

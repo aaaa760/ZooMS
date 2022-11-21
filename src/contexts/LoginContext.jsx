@@ -9,7 +9,7 @@ const LoginProvider = ({ children }) => {
   useEffect(() => {
     setAccount(localStorage.getItem("account"));
     setLoginStatus(localStorage.getItem("loginStatus") === "true");
-  }, [account, loginStatus]);
+  }, [setAccount, setLoginStatus]);
 
   useEffect(() => {
     if (loginStatus) {

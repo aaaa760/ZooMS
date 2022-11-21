@@ -116,7 +116,7 @@ function Donate() {
             </p>
             <table
               className="text-left ml-auto mr-auto"
-              cellspacing="20"
+              cellSpacing="20"
               border="1"
             >
               <tbody>
@@ -144,9 +144,9 @@ function Donate() {
               </p>
               <p className="text-left ml-6">to donate: </p>
               <ul className="grid gap-2 w-full md:grid-cols-4 mt-2 mb-3">
-                <li class="form-check">
+                <li className="form-check">
                   <input
-                    class="hidden peer"
+                    className="hidden peer"
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio1"
@@ -156,15 +156,15 @@ function Donate() {
                     }}
                   />
                   <label
-                    class="form-check-label p-2 text-lg inline-flex justify-between items-center text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    for="DonationRadio1"
+                    className="form-check-label p-2 text-lg inline-flex justify-between items-center text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    htmlFor="DonationRadio1"
                   >
                     <span> &#x20b9; 1,000</span>
                   </label>
                 </li>
                 <li>
                   <input
-                    class="hidden peer"
+                    className="hidden peer"
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio2"
@@ -174,15 +174,15 @@ function Donate() {
                     }}
                   />
                   <label
-                    class="form-check-label p-2 text-lg inline-flex justify-between items-center text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    for="DonationRadio2"
+                    className="form-check-label p-2 text-lg inline-flex justify-between items-center text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    htmlFor="DonationRadio2"
                   >
                     <span> &#x20b9; 5,000</span>
                   </label>
                 </li>
                 <li>
                   <input
-                    class="hidden peer"
+                    className="hidden peer"
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio3"
@@ -192,15 +192,15 @@ function Donate() {
                     }}
                   />
                   <label
-                    class="form-check-label inline-flex justify-between items-center p-2 text-lg text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    for="DonationRadio3"
+                    className="form-check-label inline-flex justify-between items-center p-2 text-lg text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    htmlFor="DonationRadio3"
                   >
                     <span> &#x20b9; 10,000</span>
                   </label>
                 </li>
                 <li>
                   <input
-                    class="hidden peer"
+                    className="hidden peer"
                     type="radio"
                     name="DonationRadio"
                     id="DonationRadio4"
@@ -210,8 +210,8 @@ function Donate() {
                     }}
                   />
                   <label
-                    class="form-check-label inline-flex justify-between items-center p-2 text-lg text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-                    for="DonationRadio4"
+                    className="form-check-label inline-flex justify-between items-center p-2 text-lg text-gray-500 bg-white rounded-lg border border-gray-200 cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    htmlFor="DonationRadio4"
                   >
                     <span> &#x20b9; 25,000</span>
                   </label>

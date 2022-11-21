@@ -14,7 +14,7 @@ app.post("/sql_donate", (req, res) => {
   const email = req.body.email;
   const amount = req.body.amount;
   const city = req.body.city;
-  const phone = req.body.phone;
+  const phone = req.body.phone.substring(3);
   const sqlInsert =
     "INSERT INTO donations (name, email,city, phone,amount , date) VALUES (?,?,?,?,?,?)";
   db.query(
