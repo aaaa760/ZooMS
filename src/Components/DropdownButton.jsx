@@ -46,7 +46,7 @@ const DropdownButton = () => {
       </div>
 
       {open && (
-        <div className="block md:fixed md:right-10 w-40 h-32 bg-white mt-2">
+        <div className="block md:fixed md:right-10 w-40 h-auto bg-white mt-2">
           <ul
             aria-labelledby="dropdownDefault"
             className="py-1 text-sm text-black rounded"

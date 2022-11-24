@@ -1,9 +1,14 @@
-
+import React from "react";
+import {useContext} from "react";
+import { LoginContext } from "../contexts/LoginContext";
 
 function BookTickets_step_3() {
+  const { ticket, visitor } = useContext(LoginContext);
   return (
     <div>
-      <h1>Hello</h1>
+      
     </div>
   );
 }
+
+export default BookTickets_step_3;

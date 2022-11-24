@@ -31,6 +31,71 @@ app.post("/sql_donate", (req, res) => {
   );
 });
 
+app.post("/sql_book_ticket", (req, res) => {
+  const phone = req.body.Phone.substring(3);
+  const name = req.body.Name;
+  const city = req.body.City;
+  const email = req.body.Email;
+  const date = req.body.Date;
+  const adult = req.body.Adult;
+  const child = req.body.Child;
+  const sqlInsert =
+    "INSERT INTO Tickets(Phone, Name, City, Email, Date, adult, child) VALUES (?,?,?,?,?,?,?)";
+  db.query(
+    sqlInsert,
+    [phone, name, city, email, date, adult, child],
+    (err, result) => {
+      console.log(result);
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Values Inserted");
+      }
+    }
+  );
+});
+
+app.post("/sql_addAnimal", (req, res) => {
+  const Name = req.body.animal;
+  const Gender = req.body.gender;
+  const DOB = req.body.dob;
+  const weight = req.body.weight;
+  const class_id = req.body.class_id;
+  const vet_id = req.body.vet;
+  const sqlInsert = "INSERT INTO Animal(Name,Gender,weight,DOB,AGE,class_id,vet_id) VALUES (?,?,?,?,?,?,?)";
+  db.query(
+    sqlInsert,
+    [Name, Gender, weight, DOB, AGE, class_id,vet_id],
+    (err, result) => {
+      console.log(result);
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Values Inserted");
+      }
+    }
+  );
+});
+
+app.post("/sql_addClassification", (req, res) => {
+   const Class_name = req.body.className;
+   const no_of_animals = req.body.noOfAnimals;
+
+    const sqlInsert = "INSERT INTO Classification(Class_name,no_of_animals) VALUES (?,?)";
+    db.query(
+        sqlInsert,
+        [Class_name, no_of_animals],
+        (err, result) => {
+            console.log(result);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
 app.post("/sql_login", (req, res) => {
   const number = req.body.number;
   const sqlSelect = "SELECT * FROM users WHERE phone = ?";
@@ -53,16 +118,15 @@ app.post("/sql_login", (req, res) => {
   });
 });
 
-app.get("/sql_login", (req , res) => {
-    if(logged_phone_number != ""){
+app.get("/sql_login", (req, res) => {
+  if (logged_phone_number != "") {
     const sqlSelect = "SELECT role FROM users WHERE phone = ?";
     db.query(sqlSelect, [logged_phone_number], (err, result) => {
-        res.send({loggedIn : true, user : result});
-    
+      res.send({ loggedIn: true, user: result });
     });
-} else{
-    res.send({loggedIn : false, user : null});
-}
+  } else {
+    res.send({ loggedIn: false, user: null });
+  }
 });
 
 // app.get("/sql_donate" , (req, res) => {

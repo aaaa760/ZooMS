@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../Components/Button";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import Axios from "axios";
 import { LoginContext } from "../contexts/LoginContext";
 
@@ -8,34 +8,34 @@ function Donate() {
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [showDetails, setShowDetails] = useState(false);
   const [details, setDetails] = useState({});
   const [amount, setAmount] = useState(0);
-  const { loginStatus } = useContext(LoginContext);
+  const { loginStatus, account } = useContext(LoginContext);
 
   const addDonation = () => {
     if (loginStatus) {
-      console.log("Thank you for your Donation. Amount Donated " + amount);
       Axios.post("http://localhost:3001/sql_donate", {
         name: name,
         city: city,
         email: email,
-        phone: phone,
+        phone: account,
         amount: amount,
       }).then(() => {
+        console.log("Thank you for your Donation. Amount Donated " + amount);
         alert("Thank you for your Donation. Amount Donated " + amount);
       });
+
     }
   };
 
   const getDetails = () => {
-    if (name && city && email && phone) {
+    console.log("account: " + account);
+    if (name && city && email) {
       setDetails({
         Name: name,
         City: city,
-        Email: email,
-        Phone: phone,
+        Email: email
       });
       setShowDetails(true);
     }
@@ -94,7 +94,7 @@ function Donate() {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="m-5">
+              {/* <div className="m-5">
                 <label className="block text-gray-500 text-left font-bold mb-1 md:mb-0 pr-4">
                   Please Enter Your Mobile Number
                 </label>
@@ -105,7 +105,7 @@ function Donate() {
                   placeholder="Your Mobile Number"
                   onChange={(e) => setPhone(e.target.value)}
                 />
-              </div>
+              </div> */}
             </form>
             <Button func={getDetails}>Next</Button>
           </div>
