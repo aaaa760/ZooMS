@@ -3,8 +3,13 @@ import Button from "../Components/Button";
 import { useState, useContext } from "react";
 import Axios from "axios";
 import { LoginContext } from "../contexts/LoginContext";
+import { useNavigate } from "react-router-dom";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Donate() {
+
+
   const [name, setName] = useState("");
   const [city, setCity] = useState("");
   const [email, setEmail] = useState("");
@@ -12,6 +17,7 @@ function Donate() {
   const [details, setDetails] = useState({});
   const [amount, setAmount] = useState(0);
   const { loginStatus, account } = useContext(LoginContext);
+  
 
   const addDonation = () => {
     if (loginStatus) {
@@ -23,7 +29,9 @@ function Donate() {
         amount: amount,
       }).then(() => {
         console.log("Thank you for your Donation. Amount Donated " + amount);
-        alert("Thank you for your Donation. Amount Donated " + amount);
+        toast.success("Thank you for your Donation. Amount Donated " + amount);
+       
+      
       });
 
     }
@@ -43,6 +51,8 @@ function Donate() {
   };
 
   return (
+    <>
+    <ToastContainer />
     <div className="w-screen h-screen flex justify-center items-center text-center bg-gradient-to-tr from-yellow-200 via-green-200 to-green-500">
       <div className="flex gap-4 flex-row flex-wrap w-3/6 rounded-lg">
         <div className="p-5 pt-10 text-left flex-auto">
@@ -233,7 +243,9 @@ function Donate() {
         )}
       </div>
     </div>
+    </>
   );
+  
 }
 
 export default Donate;

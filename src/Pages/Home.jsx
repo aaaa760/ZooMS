@@ -1,11 +1,23 @@
+import { useNavigate } from "react-router-dom";
+
+
+
 const Home = () => {
+  
+  const navigate = useNavigate();
+
   return (
     <>
-      <div className="w-full h-screen bg-[url('https://www.wallpapers.net/love-birds-hd-wallpaper/download/5120x2160.jpg')] bg-cover flex items-center mt-[-78px]">
+      <div className="w-full h-screen bg-[url('https://www.mysuruzoo.info/images/banner1.jpg')] bg-cover flex items-center mt-[-78px]">
         <div className=" w-full md:mx-center text sm:mx-20 2xs:mx-10 select-none">
-          <h1 className="xs:text-6xl text-7xl  font-serif  text-center text-clip table-caption bg-blend-color ">
-            Welcome to Zooms
+          <h1 className="xs:text-6xl text-3xl  font-bold  text-center text-clip table-caption bg-blend-color text-white ">
+            Welcome to 
           </h1>
+          <h1 className="xs:text-6xl text-8xl  font-bold  text-center text-clip table-caption bg-blend-color text-white ">
+            ZooMS
+          </h1>
+          <button className="text-white mx-10 mt-5 text-bold text-2xl bg-orange-700  hover:shadow focus:outline-none focus:ring-4  font-medium rounded-full  px-5 py-2.5 text-center mr-2 mb-2" onClick={() => navigate("/visit")} >PLAN YOUR VISIT</button>
+
         </div>
       </div>
 

@@ -62,10 +62,11 @@ app.post("/sql_addAnimal", (req, res) => {
   const weight = req.body.weight;
   const class_id = req.body.class_id;
   const vet_id = req.body.vet;
-  const sqlInsert = "INSERT INTO Animal(Name,Gender,weight,DOB,class_id,vet_id) VALUES (?,?,?,?,?,?)";
+  const image = req.body.image;
+  const sqlInsert = "INSERT INTO Animal(Name,Gender,weight,DOB,class_id,vet_id,imageUrl) VALUES (?,?,?,?,?,?,?)";
   db.query(
     sqlInsert,
-    [Name, Gender, weight, DOB,class_id,vet_id],
+    [Name, Gender, weight, DOB,class_id,vet_id,image],
     (err, result) => {
       console.log(result);
       if (err) {

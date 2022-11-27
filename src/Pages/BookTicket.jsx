@@ -3,6 +3,8 @@ import Button from "../Components/Button";
 import { useState, useContext } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 import Axios from "axios";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function BookTicket() {
   const [name, setName] = useState("");
@@ -32,7 +34,7 @@ function BookTicket() {
             Child: child,
           }).then(() => {
             console.log("Your ticket is booked");
-            alert("Thank you " + name + " for booking ticket");
+            toast.success("Thank You,Your ticket is booked");
           });
         }
     }
@@ -61,6 +63,7 @@ function BookTicket() {
 
   return (
     <>
+      <ToastContainer/>
       {page1 ? (
         <div className="w-screen h-screen flex justify-center items-center text-center bg-gradient-to-tr from-yellow-200 via-green-200 to-green-500">
           <div className="flex gap-4 flex-row flex-wrap w-3/6 rounded-lg">

@@ -13,6 +13,7 @@ const AnimalForm = () => {
     const [weight, setWeight] = useState()
     const [class_id, setClass_id] = useState("")
     const [vet, setVet] = useState("")
+    const [image, setImage] = useState("")
     const { loginStatus, account } = useContext(LoginContext);
     
    const addAnimal = () => {
@@ -24,6 +25,7 @@ const AnimalForm = () => {
         weight: weight,
         class_id: class_id,
         vet: vet,
+        image: image,
       }).then((response) => {
         console.log(response);
         toast.success("Animal Added");
@@ -33,6 +35,7 @@ const AnimalForm = () => {
         setWeight("");
         setClass_id("");
         setVet("");
+        setImage("")
       });
       
     };
@@ -111,6 +114,17 @@ const AnimalForm = () => {
               placeholder="Enter vet id"
               value={vet}
               onChange={(e) => setVet(e.target.value)}
+            />
+
+      <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
+             Enter Animal image url
+            </label>
+            <input
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              type="text" name="image-url"
+              placeholder="Enter image url"
+              value={image}
+              onChange={(e) => setImage(e.target.value)}
             />
 
             <button
