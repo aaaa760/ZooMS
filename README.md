@@ -28,6 +28,13 @@ A Zoo management system with admin and user view
 3. source `zooms.sql` 
 
 
+## Authors
+
+1. Mahammad siraj cheruvu
+2. Appala venkata Avinash
+3. Posam Yeswanth Reddy
+
+
 ## License
 
 This project is licensed under the MIT License- see the [LICENSE](LICENSE) file for details.
