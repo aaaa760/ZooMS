@@ -1,6 +1,36 @@
+import Axios from "axios";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Table = ({ type, data }) => {
+
+  
+  const deleteAnimal = (id) => {
+    
+    Axios.post("http://localhost:3001/sql_deleteAnimal", {
+        id: id,
+    }).then((response) => {
+      console.log(response);
+      toast.success("Animal deleted");
+    });
+  };
+
+  const deleteFood = (food_id) => {
+    
+    Axios.post("http://localhost:3001/sql_deleteFood", {
+        food_id: food_id,
+    }).then((response) => {
+      console.log(response);
+      toast.success("Food deleted");
+    });
+  };
+
+
+
+
   return (
     <>
+    <ToastContainer />
       {type === "Animals" ? (
         <>
           <table className="mt-4 table-fixed w-full border-separate">
@@ -13,6 +43,7 @@ const Table = ({ type, data }) => {
                 <th className="border border-slate-300">DOB</th>
                 <th className="border border-slate-300">Classification</th>
                 <th className="border border-slate-300">Enclosure</th>
+                <th className="border border-slate-300">Delete Animal</th>
               </tr>
             </thead>
             <tbody>
@@ -38,6 +69,11 @@ const Table = ({ type, data }) => {
                   </td>
                   <td className="border border-slate-300 pt-2 pb-2 border-spacing-12">
                     {d.location}
+                  </td>
+                  <td className="border border-slate-300 pt-2 pb-2 border-spacing-12">
+                    <button onClick={()=>deleteAnimal(d.ID)} className="bg-cyan-300 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"> 
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -114,11 +150,12 @@ const Table = ({ type, data }) => {
                 <th className="border border-slate-300">ID</th>
                 <th className="border border-slate-300">Food Name</th>
                 <th className="border border-slate-300">Stock</th>
+                <th className="border border-slate-300">Actions</th>
               </tr>
             </thead>
             <tbody>
               {data.map((d) => (
-                <tr key={d.ID} className="text-center">
+                <tr key={d.food_id} className="text-center">
                   <td className="border border-slate-300 pt-2 pb-2 border-spacing-12">
                     {d.food_id}
                   </td>
@@ -127,6 +164,11 @@ const Table = ({ type, data }) => {
                   </td>
                   <td className="border border-slate-300 pt-2 pb-2 border-spacing-12">
                     {d.stock}
+                  </td>
+                  <td className="border border-slate-300 pt-2 pb-2 border-spacing-12">
+                    <button onClick={()=>deleteFood(d.food_id)} className="mx-2 bg-cyan-300 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}

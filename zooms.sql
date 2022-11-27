@@ -37,7 +37,7 @@ CREATE TABLE `Animal` (
   KEY `vet_id` (`vet_id`),
   CONSTRAINT `animal_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `classification` (`Class_ID`),
   CONSTRAINT `animal_ibfk_2` FOREIGN KEY (`vet_id`) REFERENCES `vet` (`vet_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `Animal` (
 
 LOCK TABLES `Animal` WRITE;
 /*!40000 ALTER TABLE `Animal` DISABLE KEYS */;
-INSERT INTO `Animal` VALUES (3,'Tiger','M',130,'2022-11-09 00:00:00',NULL,6,2,'https://thumbs.dreamstime.com/b/tiger-portrait-horizontal-11392212.jpg'),(4,'Elephant','M',4000,'2004-06-08 00:00:00',NULL,10,4,'https://s01.sgp1.cdn.digitaloceanspaces.com/article/162696-lrkfcomskj-1628694149.jpg'),(5,'Monkey','F',30,'2020-02-04 00:00:00',NULL,11,3,'https://images.indianexpress.com/2018/12/monkey.jpg'),(6,'Tiger','M',100,'2022-11-16 00:00:00',NULL,6,3,'https://thumbs.dreamstime.com/b/tiger-portrait-horizontal-11392212.jpg'),(7,'Deer','M',120,'2022-11-11 00:00:00',NULL,10,3,'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Red_Deer_in_Richmond_Park_-_geograph.org.uk_-_2025832.jpg/1200px-Red_Deer_in_Richmond_Park_-_geograph.org.uk_-_2025832.jpg'),(10,'Bear','M',200,'2022-11-02 00:00:00',NULL,11,3,'https://www.shutterstock.com/image-photo/protective-female-brown-bear-ursus-260nw-1725069664.jpg');
+INSERT INTO `Animal` VALUES (4,'Elephant','M',4000,'2004-06-08 00:00:00',NULL,10,4,'https://s01.sgp1.cdn.digitaloceanspaces.com/article/162696-lrkfcomskj-1628694149.jpg'),(5,'Monkey','F',30,'2020-02-04 00:00:00',NULL,11,3,'https://images.indianexpress.com/2018/12/monkey.jpg'),(6,'Tiger','M',100,'2022-11-16 00:00:00',NULL,6,3,'https://thumbs.dreamstime.com/b/tiger-portrait-horizontal-11392212.jpg'),(7,'Deer','M',120,'2022-11-11 00:00:00',NULL,10,3,'https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Red_Deer_in_Richmond_Park_-_geograph.org.uk_-_2025832.jpg/1200px-Red_Deer_in_Richmond_Park_-_geograph.org.uk_-_2025832.jpg'),(10,'Bear','M',200,'2022-11-02 00:00:00',NULL,11,3,'https://www.shutterstock.com/image-photo/protective-female-brown-bear-ursus-260nw-1725069664.jpg'),(11,'Snake','F',2,'2022-11-10 00:00:00',NULL,8,5,'https://images.pexels.com/photos/106690/pexels-photo-106690.jpeg?cs=srgb&dl=pexels-mark-broadhurst-106690.jpg&fm=jpg');
 /*!40000 ALTER TABLE `Animal` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -108,7 +108,52 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `enclosureAnimalPlus` AFTER INSERT ON `animal` FOR EACH ROW BEGIN  DECLARE eid INT; DECLARE count INT; SELECT Encloser_id FROM eclosed_by WHERE Animal_id=new.ID INTO eid;SELECT no_of_animals FROM Enclosure WHERE Enclosure_id=eid INTO count;SET count=count+1;UPDATE Enclosure SET no_of_animals=count WHERE Enclosure_id=eid;END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `beforeDelete` BEFORE DELETE ON `animal` FOR EACH ROW BEGIN DELETE FROM eclosed_by WHERE Animal_id=old.ID;END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `animalSubClassification` AFTER DELETE ON `animal` FOR EACH ROW BEGIN DECLARE count INT; SELECT no_of_animals FROM classification WHERE Class_ID=old.class_id INTO count; SET count = count-1; UPDATE classification SET no_of_animals=count WHERE class_ID=old.class_id; END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `enclosureAnimalMinus` AFTER DELETE ON `animal` FOR EACH ROW BEGIN DECLARE eid INT; DECLARE count INT; SELECT Encloser_id FROM eclosed_by WHERE Animal_id=old.ID INTO eid; SELECT no_of_animals FROM Enclosure WHERE Enclosure_id=eid INTO count;  SET count=count-1;  UPDATE Enclosure SET no_of_animals=count WHERE Enclosure_id=eid;      END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -136,7 +181,7 @@ CREATE TABLE `Animal_food` (
 
 LOCK TABLES `Animal_food` WRITE;
 /*!40000 ALTER TABLE `Animal_food` DISABLE KEYS */;
-INSERT INTO `Animal_food` VALUES (1,'sheep meat','10'),(2,'Sugar cane','100');
+INSERT INTO `Animal_food` VALUES (2,'Sugar cane','100');
 /*!40000 ALTER TABLE `Animal_food` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,7 +206,7 @@ CREATE TABLE `classification` (
 
 LOCK TABLES `classification` WRITE;
 /*!40000 ALTER TABLE `classification` DISABLE KEYS */;
-INSERT INTO `classification` VALUES (6,'carnivores',2),(7,'birds',0),(8,'reptiles',0),(9,'primates',0),(10,'herbivores',2),(11,'omnivores',2);
+INSERT INTO `classification` VALUES (6,'carnivores',1),(7,'birds',0),(8,'reptiles',1),(9,'primates',0),(10,'herbivores',2),(11,'omnivores',2);
 /*!40000 ALTER TABLE `classification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +228,7 @@ CREATE TABLE `donations` (
   PRIMARY KEY (`id`),
   KEY `phone` (`phone`),
   CONSTRAINT `donations_ibfk_1` FOREIGN KEY (`phone`) REFERENCES `users` (`phone`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +237,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (9,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',1000,'2022-11-13 12:46:08'),(10,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',5000,'2022-11-13 12:51:38'),(21,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',5000,'2022-11-20 00:13:10'),(22,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',10000,'2022-11-23 20:32:58'),(23,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',25000,'2022-11-23 22:35:01'),(25,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',25000,'2022-11-23 22:43:10'),(26,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',5000,'2022-11-23 23:01:56'),(27,'Appala Avinash','avinash9605@gmail.com','Ongole','9989986405',10000,'2022-11-24 00:21:12'),(29,'Appala Avinash','avinash9605@gmail.com','Ongole','9100287741',10000,'2022-11-27 18:53:03'),(30,'Saketh','saketh6669@gmail.com','Nandyal','9100287741',25000,'2022-11-27 18:57:35'),(31,'saideep','saidep1212@gmail.com','hyderabad','9100287741',25000,'2022-11-27 19:29:54'),(32,'Appala Avinash','avinash9605@gmail.com','Ongole','9100287741',10000,'2022-11-27 19:38:45');
+INSERT INTO `donations` VALUES (9,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',1000,'2022-11-13 12:46:08'),(10,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',5000,'2022-11-13 12:51:38'),(21,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',5000,'2022-11-20 00:13:10'),(22,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',10000,'2022-11-23 20:32:58'),(23,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',25000,'2022-11-23 22:35:01'),(25,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',25000,'2022-11-23 22:43:10'),(26,'Appala Avinash','avinash9605@gmail.com','Ongole','9391037339',5000,'2022-11-23 23:01:56'),(27,'Appala Avinash','avinash9605@gmail.com','Ongole','9989986405',10000,'2022-11-24 00:21:12'),(29,'Appala Avinash','avinash9605@gmail.com','Ongole','9100287741',10000,'2022-11-27 18:53:03'),(30,'Saketh','saketh6669@gmail.com','Nandyal','9100287741',25000,'2022-11-27 18:57:35'),(31,'saideep','saidep1212@gmail.com','hyderabad','9100287741',25000,'2022-11-27 19:29:54'),(32,'Appala Avinash','avinash9605@gmail.com','Ongole','9100287741',10000,'2022-11-27 19:38:45'),(33,'Hemanth','hemanthsaiboyapati@gmail.com','Ongole','8919969093',25000,'2022-11-28 01:21:27');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -245,7 +290,7 @@ CREATE TABLE `eclosed_by` (
 
 LOCK TABLES `eclosed_by` WRITE;
 /*!40000 ALTER TABLE `eclosed_by` DISABLE KEYS */;
-INSERT INTO `eclosed_by` VALUES (2,3),(3,4),(4,5),(2,6),(3,7),(4,10);
+INSERT INTO `eclosed_by` VALUES (3,4),(4,5),(2,6),(3,7),(4,10),(5,11);
 /*!40000 ALTER TABLE `eclosed_by` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +342,7 @@ CREATE TABLE `Enclosure` (
 
 LOCK TABLES `Enclosure` WRITE;
 /*!40000 ALTER TABLE `Enclosure` DISABLE KEYS */;
-INSERT INTO `Enclosure` VALUES (2,3000,0,'carni zone'),(3,4000,0,'herbi zone'),(4,3500,0,'onmi zone'),(5,2000,0,'rept zone'),(6,3000,0,'bird zone'),(7,4000,0,'primate zone');
+INSERT INTO `Enclosure` VALUES (2,3000,0,'carni zone'),(3,4000,0,'herbi zone'),(4,3500,0,'onmi zone'),(5,2000,1,'rept zone'),(6,3000,0,'bird zone'),(7,4000,0,'primate zone');
 /*!40000 ALTER TABLE `Enclosure` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -328,7 +373,7 @@ CREATE TABLE `Tickets` (
 
 LOCK TABLES `Tickets` WRITE;
 /*!40000 ALTER TABLE `Tickets` DISABLE KEYS */;
-INSERT INTO `Tickets` VALUES ('9391037339','Bhanu Satwik','Hyderabad','bhanu@gmail.com','2022-11-25 00:00:00',5,2,600),('9989986405','Appala Avinash','Ongole','avinash9605@gmail.com','2022-11-26 00:00:00',2,2,300),('9100287741','Appala Avinash','Ongole','avinash9605@gmail.com','2022-11-30 00:00:00',1,2,200),('9100287741','Appala Avinash','Ongole','avinash9605@gmail.com','2022-12-01 00:00:00',1,2,200);
+INSERT INTO `Tickets` VALUES ('9391037339','Bhanu Satwik','Hyderabad','bhanu@gmail.com','2022-11-25 00:00:00',5,2,600),('9989986405','Appala Avinash','Ongole','avinash9605@gmail.com','2022-11-26 00:00:00',2,2,300),('9100287741','Appala Avinash','Ongole','avinash9605@gmail.com','2022-11-30 00:00:00',1,2,200),('9100287741','Appala Avinash','Ongole','avinash9605@gmail.com','2022-12-01 00:00:00',1,2,200),('8919969093','Hemanth','Vijayawada','hemanthsaiboyapati@gmail.com','2022-11-30 00:00:00',3,1,350);
 /*!40000 ALTER TABLE `Tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -369,7 +414,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('7416951019','visitor'),('8977453132','admin'),('9100287741','visitor'),('9391037339','admin'),('9989986405','visitor');
+INSERT INTO `users` VALUES ('7416951019','visitor'),('8919969093','visitor'),('8977453132','admin'),('9100287741','visitor'),('9391037339','admin'),('9989986405','visitor');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -408,4 +453,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-27 22:28:45
+-- Dump completed on 2022-11-28  1:25:48

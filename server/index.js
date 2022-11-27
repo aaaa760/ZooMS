@@ -204,7 +204,28 @@ app.post("/sql_addfood" , (req,res) => {
 });
 
     
-    
+app.post("/sql_deleteAnimal", (req, res) => { 
+    const id = req.body.id;
+    const sqlDelete = "DELETE FROM Animal WHERE id = ?";
+    db.query
+    (sqlDelete, id, (err, result) => {
+        if (err) console.log(err);
+        else res.send("Values Deleted");
+    });
+});
+
+app.post("/sql_deleteFood", (req, res) => { 
+  const id = req.body.food_id;
+  const sqlDelete = "DELETE FROM Animal_food WHERE food_id = ?";
+  db.query
+  (sqlDelete, id, (err, result) => {
+      if (err) console.log(err);
+      else{res.send("Values Deleted")};
+  });
+});
+
+
+
 
 app.get("/sql_login", (req, res) => {
   if (logged_phone_number != "") {
@@ -288,7 +309,31 @@ app.get("/sql_getEmployee", (req, res) => {
   });
 });
 
-
+app.get("/sql_animals", (req, res) => {
+  const type = req.query.type;
+  console.log(type);
+  if (type === "all") {
+    sqlSelect = "select Name, imageUrl from animal";
+    db.query(sqlSelect, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send({ loggedIn: true, result: result });
+      }
+    });
+  } else {
+    sqlSelect = "select Name, imageUrl from animal where class_id=" + type;
+    db.query(sqlSelect, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        res.send({ loggedIn: true, result: result });
+      }
+    });
+  }
+});
 
 
 // app.get("/sql_donate" , (req, res) => {
