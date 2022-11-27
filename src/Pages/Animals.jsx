@@ -1,4 +1,15 @@
+import React from "react";
+import Axios from "axios";
+
+
 const Animal = () => {
+
+    const getAnimals = (id) => {
+        Axios.get(`http://localhost:3001/animals/${id}`).then((response) => {
+            console.log(response.data);
+        });
+    };
+
   return (
     <>
       <div>

@@ -8,7 +8,7 @@ import Admin from "./Admin";
 function Main() {
   const { loginStatus } = useContext(LoginContext);
   const [role, setRole] = useState();
-  
+
   useEffect(() => {
     if (loginStatus) {
       Axios.get("http://localhost:3001/sql_login").then((response) => {
@@ -25,12 +25,11 @@ function Main() {
     <>
       {role === "admin" ? (
         <>
-        <Admin/>
-       
-      </>
-      ) : role === "visitor"?(
-        <Home/>
-      ):(<></>)}
+          <Admin />
+        </>
+      ) : (
+        <Home />
+      )}
     </>
   );
 }
