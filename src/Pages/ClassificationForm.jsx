@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ClassificationForm = () => {
   const [className, setClassName] = useState("");
@@ -11,7 +13,7 @@ const ClassificationForm = () => {
       noOfAnimals: noOfAnimals,
     }).then((response) => {
       console.log(response);
-      alert("Classification Added");
+      toast.success("Classification Added");
       setClassName("");
       setNoOfAnimals(0);
     });
@@ -19,6 +21,7 @@ const ClassificationForm = () => {
 
   return (
     <>
+      <ToastContainer/>
       <div className="mt-10 ml-5 mr-5">
         <h1 className="block mb-2 text-sm font-medium text-gray-900">
           Add a Classification

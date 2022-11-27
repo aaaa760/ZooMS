@@ -1,4 +1,4 @@
-import { Axios } from "axios";
+import  Axios from "axios";
 import React, { useState, useContext  } from "react";
 import { LoginContext } from "../contexts/LoginContext";
 
@@ -14,7 +14,7 @@ const AnimalForm = () => {
     const { loginStatus, account } = useContext(LoginContext);
     
    const addAnimal = () => {
-     if(loginStatus){
+     
       Axios.post("http://localhost:3001/sql_addAnimal",  {
         animal: animal,
         gender: gender,
@@ -26,7 +26,7 @@ const AnimalForm = () => {
         console.log(response);
         alert("Animal Added");
       });
-      }
+      
     };
 
     return (
@@ -35,7 +35,7 @@ const AnimalForm = () => {
         <h1 className="block mb-2 text-sm font-medium text-gray-900">
           Add a Animal
         </h1>
-        <form >
+       
             <input type="text" name="owner" readOnly className="hidden"/>
           <div className="flex flex-col">
             <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -106,7 +106,7 @@ const AnimalForm = () => {
             </button>
             
           </div>
-        </form>
+        
       </div>
     </>
     )
