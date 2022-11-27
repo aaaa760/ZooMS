@@ -96,6 +96,49 @@ app.post("/sql_addClassification", (req, res) => {
     );
 });
 
+
+app.post("/sql_addEnclosure" , (req,res) => {
+    const size = req.body.size;
+    const location = req.body.location;
+    const noOfAnimals = req.body.noOfAnimals;
+
+    const sqlInsert = "INSERT INTO Enclosure(size,no_of_animals,location) VALUES (?,?,?)";
+    db.query(
+        sqlInsert,
+        [size,noOfAnimals,location],
+        (err, result) => {
+            console.log(result);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+app.post("/sql_addVet" , (req,res) => {
+    const vet = req.body.vet;
+    const qualification = req.body.qualification;
+    const salary = req.body.salary;
+
+    const sqlInsert = "INSERT INTO vet(Name,qualification,salary) VALUES (?,?,?)";
+    db.query(
+        sqlInsert,
+        [vet,qualification,salary],
+        (err, result) => {
+            console.log(result);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+
+
 app.post("/sql_login", (req, res) => {
   const number = req.body.number;
   const sqlSelect = "SELECT * FROM users WHERE phone = ?";
@@ -117,6 +160,28 @@ app.post("/sql_login", (req, res) => {
     }
   });
 });
+
+app.post("/sql_addEmployee" ,(req,res) => {
+    const name = req.body.name;
+    const jobTitle = req.body.jobTitle;
+    const sid = req.body.sid;
+
+    const sqlInsert = "INSERT INTO Employee(Name,job_title,SID) VALUES (?,?,?)";
+    db.query(
+        sqlInsert,
+        [name,jobTitle,sid],
+        (err, result) => {
+            console.log(result);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+    
 
 app.get("/sql_login", (req, res) => {
   if (logged_phone_number != "") {

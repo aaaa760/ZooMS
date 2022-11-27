@@ -1,4 +1,5 @@
 import react , {useState} from "react";
+import Axios from "axios";
 
 
 const EnclosureForm = () => {
@@ -6,13 +7,28 @@ const EnclosureForm = () => {
     const [location, setLocation] = useState("")
     const [noOfAnimals, setNoOfAnimals] = useState()
 
+    const addEnclosure = () => {
+        Axios.post("http://localhost:3001/sql_addEnclosure", {
+            size: size,
+            location: location,
+            noOfAnimals: noOfAnimals,
+        }).then((response) => {
+            console.log(response);
+            alert("Enclosure Added");
+            setSize("");
+            setLocation("");
+            setNoOfAnimals(0);
+        });
+    };
+
+
     return (
         <>
         <div className="mt-10 ml-5 mr-5">
         <h1 className="block mb-2 text-sm font-medium text-gray-900">
             Add a Enclosure
         </h1>
-        <form >
+       
             <input type="text" name="owner" readOnly className="hidden"/>
             <div className="flex flex-col">
                 <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -44,10 +60,10 @@ const EnclosureForm = () => {
                     onChange={(e) => setNoOfAnimals(e.target.value)}
                 />
             </div>
-            <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <button className="mt-5 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={addEnclosure}>
                 Add Enclosure
             </button>
-        </form>
+       
         </div>
         </>
     )

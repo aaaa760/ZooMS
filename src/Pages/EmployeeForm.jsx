@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 const EmployeeForm = () => {
     const navigate = useNavigate()
     const [name ,setName] = useState("")
     const [jobTitle, setJobTitle] = useState("")
     const [sid,setSid] = useState("")
+
+    const addEmployee = () => {
+        Axios.post("http://localhost:3001/sql_addEmployee", {
+            name: name,
+            jobTitle: jobTitle,
+            sid: sid,
+        }).then((response) => {
+            console.log(response);
+            alert("Employee Added");
+            setName("");
+            setJobTitle("");
+            setSid("");
+        
+        });
+    };
+
+
     return (
         <>
         <div className="mt-10 ml-5 mr-5">
@@ -13,7 +31,7 @@ const EmployeeForm = () => {
           Add a Employee
         </h1>
 
-        <form >
+       
             <input type="text" name="owner" readOnly className="hidden"/>
             <div className="flex flex-col">
             <label className="block mb-2 text-sm font-medium text-gray-900 ">
@@ -44,13 +62,12 @@ const EmployeeForm = () => {
             />
            <button
               className=" w-1/6 bg-cyan-400 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mb-5"
-              onClick={(e) => {
-              }}
+              onClick={addEmployee}
             >
              Add Employee
             </button>    
           </div>
-        </form>
+        
         </div>
         </>
     );

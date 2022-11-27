@@ -28,9 +28,9 @@ function Main() {
         <Admin/>
        
       </>
-      ) : (
+      ) : role === "visitor"?(
         <Home/>
-      )}
+      ):(<></>)}
     </>
   );
 }

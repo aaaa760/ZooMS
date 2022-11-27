@@ -29,10 +29,6 @@ const AnimalForm = () => {
       }
     };
 
-        
-
-
-
     return (
         <>
         <div className="mt-10 ml-5 mr-5">
