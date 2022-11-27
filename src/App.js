@@ -16,9 +16,11 @@ import EmployeeForm from "./Pages/EmployeeForm";
 import VetForm from "./Pages/VetForm";
 import EnclosureForm from "./Pages/EnclosureForm";
 import Footer from "./Components/Footer";
+import Animal from "./Pages/Animals";
 
 export default function App() {
   return (
+    <>
     <LoginProvider>
     <BrowserRouter>
       <Routes>
@@ -35,12 +37,15 @@ export default function App() {
           <Route exact path="classification-form" element={<ClassificationForm />} />
           <Route exact path="employee-form" element={<EmployeeForm />} />
           <Route exact path="vet-form" element={<VetForm />} />
+          <Route exact path="animal" element={<Animal />} />
           <Route exact path="enclosure-form" element={<EnclosureForm />} />
         </Route>
-        <Route element ={<Footer />} />
+        
          
       </Routes>
     </BrowserRouter>
     </LoginProvider>
+   
+    </>
   );
 }

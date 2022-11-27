@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EmployeeForm = () => {
     const navigate = useNavigate()
@@ -15,7 +17,7 @@ const EmployeeForm = () => {
             sid: sid,
         }).then((response) => {
             console.log(response);
-            alert("Employee Added");
+            toast.success("Employee Added");
             setName("");
             setJobTitle("");
             setSid("");
@@ -26,6 +28,7 @@ const EmployeeForm = () => {
 
     return (
         <>
+        <ToastContainer/>
         <div className="mt-10 ml-5 mr-5">
         <h1 className="block mb-2 text-sm font-medium text-gray-900">
           Add a Employee
@@ -41,6 +44,7 @@ const EmployeeForm = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 type="text" name="name"
                 placeholder="Enter Employee Name"
+                value={name}
                 onChange={(e) => setName(e.target.value)}
             />
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
@@ -49,6 +53,7 @@ const EmployeeForm = () => {
             <input
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Enter Employee Job Title" name="jobTitle"
+                value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
             ></input>
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
@@ -58,6 +63,7 @@ const EmployeeForm = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 type="number" name="sid"
                 placeholder="Enter Employee sid"
+                value={sid}
                 onChange={(e) => setSid(e.target.value)}
             />
            <button

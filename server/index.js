@@ -181,6 +181,28 @@ app.post("/sql_addEmployee" ,(req,res) => {
     );
 });
 
+
+app.post("/sql_addfood" , (req,res) => {
+    const food = req.body.foodName;
+    const foodStock = req.body.foodStock;
+
+
+    const sqlInsert = "INSERT INTO Animal_food(name,stock) VALUES (?,?)";
+    db.query(
+        sqlInsert,
+        [food,foodStock],
+        (err, result) => {
+            console.log(result);
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("Values Inserted");
+            }
+        }
+    );
+});
+
+    
     
 
 app.get("/sql_login", (req, res) => {
@@ -193,6 +215,9 @@ app.get("/sql_login", (req, res) => {
     res.send({ loggedIn: false, user: null });
   }
 });
+
+
+
 
 // app.get("/sql_donate" , (req, res) => {
 //     const sqlSelect = "SELECT * FROM donations where id = (?)";

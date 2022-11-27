@@ -1,6 +1,8 @@
 import  Axios from "axios";
 import React, { useState, useContext  } from "react";
 import { LoginContext } from "../contexts/LoginContext";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -24,13 +26,20 @@ const AnimalForm = () => {
         vet: vet,
       }).then((response) => {
         console.log(response);
-        alert("Animal Added");
+        toast.success("Animal Added");
+        setAnimal("");
+        setGender("");
+        setDob("");
+        setWeight("");
+        setClass_id("");
+        setVet("");
       });
       
     };
 
     return (
         <>
+        <ToastContainer/>
         <div className="mt-10 ml-5 mr-5">
         <h1 className="block mb-2 text-sm font-medium text-gray-900">
           Add a Animal
@@ -45,6 +54,7 @@ const AnimalForm = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="text" name="name"
               placeholder="Enter Animal Name"
+              value={animal}
               onChange={(e) => setAnimal(e.target.value)}
             />
             <label className="block mb-2 mt-2 text-sm font-medium text-gray-900 ">
@@ -53,6 +63,7 @@ const AnimalForm = () => {
             <input
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder="Enter Animal Gender" name="gender"
+              value={gender}
               onChange={(e) => setGender(e.target.value)}
             ></input>
 
@@ -63,6 +74,7 @@ const AnimalForm = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="number" name="weight"
               placeholder="Enter animal weight"
+              value={weight}
               onChange={(e) => setWeight(e.target.value)}
             />
 
@@ -73,6 +85,7 @@ const AnimalForm = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="date" name="dob"
               placeholder="Enter animal date of birth"
+              value={dob}
               onChange={(e) => setDob(e.target.value)}
             />
 
@@ -85,6 +98,7 @@ const AnimalForm = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="number" name="class-id"
               placeholder="Enter class id"
+              value={class_id}
               onChange={(e) => setClass_id(e.target.value)}
             />
 
@@ -95,6 +109,7 @@ const AnimalForm = () => {
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="number" name="vet-id"
               placeholder="Enter vet id"
+              value={vet}
               onChange={(e) => setVet(e.target.value)}
             />
 

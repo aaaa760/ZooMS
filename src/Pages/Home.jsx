@@ -9,7 +9,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-5 mx-10 ">
+      <div className="mt-5 mx-10" id="about">
         <h1 className="text-3xl text-orange-900 font-bold">MISSION</h1>
         <br />
         <p className="text-black text-lg">
