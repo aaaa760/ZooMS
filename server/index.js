@@ -217,6 +217,77 @@ app.get("/sql_login", (req, res) => {
   }
 });
 
+app.get("/sql_getAnimals", (req, res) => {
+  console.log(logged_phone_number);
+
+  const sqlSelect =
+    "SELECT Animal.ID, Animal.Name, Animal.Gender, Animal.Weight, Animal.DOB, classification.Class_Name, vet.Name as vet_Name, enclosure.location FROM Animal INNER JOIN VET ON Animal.vet_id=vet.vet_id INNER JOIN classification on Animal.class_id=classification.Class_ID INNER JOIN eclosed_by on Animal.ID=eclosed_by.Animal_ID INNER JOIN enclosure on enclosure.Enclosure_id=eclosed_by.Encloser_id";
+  db.query(sqlSelect, (err, result) => {
+    console.log(result);
+    res.send({ loggedIn: true, result: result });
+  });
+});
+
+app.get("/sql_getEnclosure", (req, res) => {
+  const sqlSelect = "SELECT * FROM enclosure";
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.send({ loggedIn: true, result: result });
+    }
+  });
+});
+
+app.get("/sql_getVet", (req, res) => {
+  const sqlSelect = "SELECT * FROM vet";
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.send({ loggedIn: true, result: result });
+    }
+  });
+});
+
+app.get("/sql_getAnimalFood", (req, res) => {
+  const sqlSelect = "SELECT * FROM animal_food";
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.send({ loggedIn: true, result: result });
+    }
+  });
+});
+
+app.get("/sql_getClassifications", (req, res) => {
+  const sqlSelect = "SELECT * FROM classification";
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.send({ loggedIn: true, result: result });
+    }
+  });
+});
+
+app.get("/sql_getEmployee", (req, res) => {
+  const sqlSelect = "SELECT * FROM Employee";
+  db.query(sqlSelect, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(result);
+      res.send({ loggedIn: true, result: result });
+    }
+  });
+});
+
 
 
 

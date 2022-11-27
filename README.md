@@ -13,11 +13,20 @@ A Zoo management system with admin and user view
 
 3. Install dependencies: `npm install`.
 
-4. Again cd to server and do `npm install` for server
+4. Again cd to server and do `npm install` for server folder
 
-5. for running type `npm start` in terminal with zooms as path
+5. For running type `npm start` in terminal with zooms as path
 
-6. for running of server `node index.js` and change `db.config` with your sql details
+6. For running of server `node index.js` and change `db.config` with your sql details
+
+## Adding database to your local system 
+
+1. Create a data base names zooms in your mysql local type `create database zooms;`
+
+2. Type  `use zooms;`
+
+3. source `zooms.sql` 
+
 
 ## License
 
