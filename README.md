@@ -1,4 +1,4 @@
-## ZooMS
+# ZooMS
 
 Designed and developed a comprehensive application using React.js and MySQL for managing zoo operations
 
